@@ -23,4 +23,4 @@ RUN apt-get install -y git && pipenv install --dev
 FROM base as prod
 RUN pipenv install && \
     apt-get install cron -y && \
-    echo '0 23    * * *   root    pipenv run start' >> /etc/crontab
+    echo '0 23    * * *   root    cd /home/app && pipenv run start' >> /etc/crontab
