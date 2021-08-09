@@ -1,0 +1,10 @@
+version: "3"
+services:
+  igm-regular-exec:
+    build:
+      context: .
+      target: prod
+    environment:
+      - PYTHONPATH=/home/app/
+    command: cron -f
+    tty: true

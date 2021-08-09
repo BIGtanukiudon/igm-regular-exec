@@ -1,0 +1,11 @@
+version: "3"
+services:
+  igm-regular-exec:
+    build:
+      context: .
+      target: dev
+    volumes:
+      - ./app:/home/app
+      - ./.git:/home/.git
+    environment:
+      - PYTHONPATH=/workspace/app/
