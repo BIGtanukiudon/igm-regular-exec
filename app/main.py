@@ -1,9 +1,7 @@
 from config import URL_ENDPOINT, LOGIN_ID, LOGIN_PW, NOTIFY_TOKEN
-from models import Content
 import requests
 import urllib.parse as up
 import sys
-from typing import List
 
 
 def main():
@@ -38,14 +36,14 @@ def main():
         send_line_notify("記事の収集に失敗しました。")
         sys.exit()
 
-    scraiping_data: List[Content] = scraiping_res.json()
+    scraiping_data = scraiping_res.json()
 
     if len(scraiping_data) > 0:
         for data in scraiping_data:
-            title = data.title
-            content_url = data.content_url
+            title = data["title"] if data["title"] is not None else ""
+            content_url = data["content_url"] if data["content_url"] is not None else ""
 
-            if data == "" and content_url == "":
+            if title != "" and content_url != "":
                 message = f"{title}\r\n{content_url}"
                 send_line_notify(message)
     else:
